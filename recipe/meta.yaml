@@ -1,19 +1,19 @@
 {% set name = "proselint" %}
-{% set version = "0.10.2" %}
+{% set version = "0.11.2" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: "3a87eb393056d1bc77d898e4bcf8998f50e9ad84f7b9ff7cf2720509ac8ef904"
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 5f90d5e3414928194be23efdf1e3e821bbb79279a598cf1710b29977029c4897
 
 build:
   number: 0
   entry_points:
     - proselint = proselint.command_line:proselint
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
+  script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv '
   noarch: python
 
 requirements:
@@ -65,11 +65,11 @@ test:
     - proselint --help
 
 about:
-  home: "http://github.com/amperser/proselint"
-  license: "BSD-3-Clause"
-  license_family: "BSD"
+  home: http://github.com/amperser/proselint
+  license: BSD-3-Clause
+  license_family: BSD
   license_file: LICENSE.md
-  summary: "A linter for prose."
+  summary: A linter for prose.
 
 extra:
   recipe-maintainers:
