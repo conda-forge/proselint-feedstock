@@ -10,7 +10,7 @@ source:
   sha256: "3a87eb393056d1bc77d898e4bcf8998f50e9ad84f7b9ff7cf2720509ac8ef904"
 
 build:
-  number: 0
+  number: 1
   entry_points:
     - proselint = proselint.command_line:proselint
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
@@ -19,14 +19,16 @@ build:
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
   run:
     - click
     - future
-    - python
+    - python >={{ python_min }}
     - six
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - proselint
     - proselint.checks
