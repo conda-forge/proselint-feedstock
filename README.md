@@ -144,4 +144,5 @@ Feedstock Maintainers
 =====================
 
 * [@CJ-Wright](https://github.com/CJ-Wright/)
+* [@JaRoSchm](https://github.com/JaRoSchm/)
 
