@@ -10,7 +10,7 @@ source:
   sha256: 624964272bea14767e5df2561d87dd30767938c8cb52fb23585bc37580680e86
 
 build:
-  number: 0
+  number: 1
   entry_points:
     - proselint = proselint.command_line:proselint
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
