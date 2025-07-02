@@ -3,7 +3,7 @@ About proselint-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/proselint-feedstock/blob/main/LICENSE.txt)
 
-Home: https://proselint.com
+Home: https://proselint.com/
 
 Package license: BSD-3-Clause
 
@@ -15,7 +15,7 @@ Current build status
 
 <table><tr><td>All platforms:</td>
     <td>
-      <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7487&branchName=main">
+      <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
         <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/proselint-feedstock?branchName=main">
       </a>
     </td>
