@@ -1,0 +1,86 @@
+schema_version: 1
+
+context:
+  name: proselint
+  version: 0.14.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/proselint-${{ version }}.tar.gz
+  sha256: 624964272bea14767e5df2561d87dd30767938c8cb52fb23585bc37580680e86
+
+build:
+  number: 2
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - proselint = proselint.command_line:proselint
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - poetry-core
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - click >=8.0.0,<9.0.0
+
+tests:
+  - python:
+      imports:
+        - proselint
+        - proselint.checks
+        - proselint.checks.airlinese
+        - proselint.checks.annotations
+        - proselint.checks.archaism
+        - proselint.checks.cliches
+        - proselint.checks.consistency
+        - proselint.checks.corporate_speak
+        - proselint.checks.cursing
+        - proselint.checks.dates_times
+        - proselint.checks.hedging
+        - proselint.checks.hyperbole
+        - proselint.checks.jargon
+        - proselint.checks.lexical_illusions
+        - proselint.checks.lgbtq
+        - proselint.checks.links
+        - proselint.checks.malapropisms
+        - proselint.checks.misc
+        - proselint.checks.mixed_metaphors
+        - proselint.checks.mondegreens
+        - proselint.checks.needless_variants
+        - proselint.checks.nonwords
+        - proselint.checks.oxymorons
+        - proselint.checks.psychology
+        - proselint.checks.redundancy
+        - proselint.checks.security
+        - proselint.checks.sexism
+        - proselint.checks.skunked_terms
+        - proselint.checks.spelling
+        - proselint.checks.terms
+        - proselint.checks.typography
+        - proselint.checks.uncomparables
+        - proselint.checks.weasel_words
+      python_version: ${{ python_min }}.*
+  - requirements:
+      run:
+        - pip
+        - python ${{ python_min }}.*
+    script:
+      - pip check
+      - proselint --help
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE.md
+  summary: A linter for prose.
+  homepage: https://proselint.com
+
+extra:
+  recipe-maintainers:
+    - CJ-Wright
+    - JaRoSchm
