@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: proselint
-  version: 0.14.0
+  version: 0.16.0
 
 package:
   name: ${{ name|lower }}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/proselint-${{ version }}.tar.gz
-  sha256: 624964272bea14767e5df2561d87dd30767938c8cb52fb23585bc37580680e86
+  sha256: 2568db94db227ea3aa011f88ddb6f554707b99b2c7447666bf00d71c5d7167cb
 
 build:
-  number: 2
+  number: 0
   noarch: python
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
@@ -27,8 +27,8 @@ requirements:
     - pip
   run:
     - python >=${{ python_min }}
-    - click >=8.0.0,<9.0.0
-
+    - google-re2-stubs >=0.1.1
+    - google-re2 >=1.1.20251105
 tests:
   - python:
       imports:
