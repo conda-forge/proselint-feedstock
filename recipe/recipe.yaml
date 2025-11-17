@@ -18,7 +18,7 @@ build:
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
     entry_points:
-      - proselint = proselint.command_line:proselint
+      - proselint = proselint.command_line:main
 
 requirements:
   host:
