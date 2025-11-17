@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: proselint
-  version: 0.14.0
+  version: 0.16.0
 
 package:
   name: ${{ name|lower }}
@@ -10,44 +10,42 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/proselint-${{ version }}.tar.gz
-  sha256: 624964272bea14767e5df2561d87dd30767938c8cb52fb23585bc37580680e86
+  sha256: 2568db94db227ea3aa011f88ddb6f554707b99b2c7447666bf00d71c5d7167cb
 
 build:
-  number: 2
+  number: 0
   noarch: python
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
     entry_points:
-      - proselint = proselint.command_line:proselint
+      - proselint = proselint.command_line:main
 
 requirements:
   host:
     - python ${{ python_min }}.*
-    - poetry-core
+    - uv-build
     - pip
   run:
     - python >=${{ python_min }}
-    - click >=8.0.0,<9.0.0
+    - google-re2-stubs >=0.1.1
+    - google-re2 >=1.1.20251105
 
+# fails on windows as google-re2 is not available there, see google-re2-feedstock#17
+# (November 2025)
 tests:
   - python:
       imports:
         - proselint
         - proselint.checks
-        - proselint.checks.airlinese
         - proselint.checks.annotations
         - proselint.checks.archaism
         - proselint.checks.cliches
-        - proselint.checks.consistency
-        - proselint.checks.corporate_speak
-        - proselint.checks.cursing
         - proselint.checks.dates_times
         - proselint.checks.hedging
-        - proselint.checks.hyperbole
-        - proselint.checks.jargon
+        - proselint.checks.industrial_language.airlinese
+        - proselint.checks.industrial_language.corporate_speak
+        - proselint.checks.industrial_language.jargon
         - proselint.checks.lexical_illusions
-        - proselint.checks.lgbtq
-        - proselint.checks.links
         - proselint.checks.malapropisms
         - proselint.checks.misc
         - proselint.checks.mixed_metaphors
@@ -57,21 +55,22 @@ tests:
         - proselint.checks.oxymorons
         - proselint.checks.psychology
         - proselint.checks.redundancy
-        - proselint.checks.security
-        - proselint.checks.sexism
         - proselint.checks.skunked_terms
+        - proselint.checks.social_awareness.lgbtq
+        - proselint.checks.social_awareness.sexism
         - proselint.checks.spelling
+        - proselint.checks.spelling.consistency
         - proselint.checks.terms
         - proselint.checks.typography
         - proselint.checks.uncomparables
         - proselint.checks.weasel_words
       python_version: ${{ python_min }}.*
+      pip_check: true
   - requirements:
       run:
         - pip
         - python ${{ python_min }}.*
     script:
-      - pip check
       - proselint --help
 
 about:
