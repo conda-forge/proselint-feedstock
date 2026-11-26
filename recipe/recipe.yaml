@@ -1,15 +1,14 @@
 schema_version: 1
 
 context:
-  name: proselint
   version: 0.16.0
 
 package:
-  name: ${{ name|lower }}
+  name: proselint
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/proselint-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/p/proselint/proselint-${{ version }}.tar.gz
   sha256: 2568db94db227ea3aa011f88ddb6f554707b99b2c7447666bf00d71c5d7167cb
 
 build:
@@ -80,7 +79,6 @@ about:
   homepage: https://proselint.com
 
 extra:
-  feedstock-name: proselint
   recipe-maintainers:
     - CJ-Wright
     - JaRoSchm
