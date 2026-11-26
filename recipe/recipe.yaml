@@ -1,19 +1,18 @@
 schema_version: 1
 
 context:
-  name: proselint
   version: 0.16.0
 
 package:
-  name: ${{ name|lower }}
+  name: proselint
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/proselint-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/p/proselint/proselint-${{ version }}.tar.gz
   sha256: 2568db94db227ea3aa011f88ddb6f554707b99b2c7447666bf00d71c5d7167cb
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
@@ -30,8 +29,6 @@ requirements:
     - google-re2-stubs >=0.1.1
     - google-re2 >=1.1.20251105
 
-# fails on windows as google-re2 is not available there, see google-re2-feedstock#17
-# (November 2025)
 tests:
   - python:
       imports:
@@ -64,7 +61,9 @@ tests:
         - proselint.checks.typography
         - proselint.checks.uncomparables
         - proselint.checks.weasel_words
-      python_version: ${{ python_min }}.*
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
       pip_check: true
   - requirements:
       run:
